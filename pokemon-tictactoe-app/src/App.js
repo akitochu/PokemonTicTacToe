@@ -1,5 +1,6 @@
 import './App.css';
-import {useState, useEffect, useReducer} from "react";
+import {useState, useEffect} from "react";
+//import {Card} from 'react-bootstrap';
 import axios from 'axios';
 
 const URL = `https://pokeapi.co/api/v2/pokemon/`
@@ -35,21 +36,24 @@ function App() {
   const [inputTypes, setInputTypes] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [checkInput, setCheckInput] = useState(false);
+  const [selectedPokemonId, setSelectedPokemonId] = useState("");
   const [PLAYER_ONE_TURN, setTurn] = useState(true);
+  const [usedPokemonHistory, setUsedPokemonHistory] = useState([])
 
 
+  
   const [type1, setType1] = useState(gameTypes[Math.floor(Math.random() * gameTypes.length)])
   gameTypes.splice(gameTypes.indexOf(type1), 1)
   const [type2, setType2] = useState(gameTypes[Math.floor(Math.random() * gameTypes.length)])
-  gameTypes.splice(gameTypes.indexOf(type1), 1)
+  gameTypes.splice(gameTypes.indexOf(type2), 1)
   const [type3, setType3] = useState(gameTypes[Math.floor(Math.random() * gameTypes.length)])
-  gameTypes.splice(gameTypes.indexOf(type1), 1)
+  gameTypes.splice(gameTypes.indexOf(type3), 1)
   const [type4, setType4] = useState(gameTypes[Math.floor(Math.random() * gameTypes.length)])
-  gameTypes.splice(gameTypes.indexOf(type1), 1)
+  gameTypes.splice(gameTypes.indexOf(type4), 1)
   const [type5, setType5] = useState(gameTypes[Math.floor(Math.random() * gameTypes.length)])
-  gameTypes.splice(gameTypes.indexOf(type1), 1)
+  gameTypes.splice(gameTypes.indexOf(type5), 1)
   const [type6, setType6] = useState(gameTypes[Math.floor(Math.random() * gameTypes.length)])
-  gameTypes.splice(gameTypes.indexOf(type1), 1)
+  gameTypes.splice(gameTypes.indexOf(type6), 1)
 
 
 
@@ -69,6 +73,8 @@ function App() {
     if(tile9Colour == "grey" && selectedTile != "tile9")setTile9Colour("white");
 
     checkValidInput()
+    setUsedPokemonHistory(usedPokemonHistory)
+    console.log(usedPokemonHistory, "TEST")
   })
 
   const checkValidInput = () => {
@@ -79,60 +85,78 @@ function App() {
           switch(selectedTile){
             case "tile1":
               setTile1Colour("red")
+              addToPokemonHistory()
               break;
             case "tile2":
               setTile2Colour("red")
+              addToPokemonHistory()
               break;
             case "tile3":
               setTile3Colour("red")
+              addToPokemonHistory()
               break;
             case "tile4":
               setTile4Colour("red")
+              addToPokemonHistory()
               break;
             case "tile5":
               setTile5Colour("red")
+              addToPokemonHistory()
               break;
             case "tile6":
               setTile6Colour("red")
+              addToPokemonHistory()
               break;
             case "tile7":
               setTile7Colour("red")
+              addToPokemonHistory()
               break;
             case "tile8":
               setTile8Colour("red")
+              addToPokemonHistory()
               break;
             case "tile9":
               setTile9Colour("red")
+              addToPokemonHistory()
               break;
           }
           }else{
             switch(selectedTile){
               case "tile1":
                 setTile1Colour("blue")
+                addToPokemonHistory()
                 break;
               case "tile2":
                 setTile2Colour("blue")
+                addToPokemonHistory()
                 break;
               case "tile3":
                 setTile3Colour("blue")
+                addToPokemonHistory()
                 break;
               case "tile4":
                 setTile4Colour("blue")
+                addToPokemonHistory()
                 break;
               case "tile5":
                 setTile5Colour("blue")
+                addToPokemonHistory()
                 break;
               case "tile6":
                 setTile6Colour("blue")
+                addToPokemonHistory()
                 break;
               case "tile7":
                 setTile7Colour("blue")
+                addToPokemonHistory()
                 break;
               case "tile8":
                 setTile8Colour("blue")
+                addToPokemonHistory()
                 break;
               case "tile9":
                 setTile9Colour("blue")
+                addToPokemonHistory()
                 break;
           }
         }
@@ -148,7 +172,7 @@ function App() {
     const fetchData = async () => {
       const result = await fetch(URL+"ditto")
       result.json().then(json => {
-        console.log(json["types"]);
+        console.log(json);
       })
     }
     fetchData();
@@ -162,6 +186,7 @@ function App() {
        (tile1Colour == tile5Colour && tile5Colour == tile9Colour && tile1Colour != "white") || (tile3Colour == tile5Colour && tile5Colour == tile7Colour && tile3Colour != "white")){
       return true
     }else return false;  
+
   };
 
   const displayVictory = () => {
@@ -176,107 +201,133 @@ function App() {
     console.log("in here")
     console.log(userInput)
     axios.get(URL+userInput).then(response => {
-      console.log(response["data"]["types"]["0"]["type"]["name"], "YEBOI");
       setInputTypes([response["data"]["types"]["0"]["type"]["name"], response["data"]["types"]["1"]["type"]["name"]])
       setCheckInput(true)
-      console.log(inputTypes, "BOY IF U")
+      setSelectedPokemonId(response["data"]["id"])
     }).catch(error => {
       console.error(error)
     });
   }
+
+  const addToPokemonHistory = () => {
+    const newPokemon = {
+      id:selectedPokemonId,
+      value:userInput
+    }
+
+    if(newPokemon){
+      console.log("newPokemon", newPokemon)
+      console.log(usedPokemonHistory)
+      let history = [...usedPokemonHistory]
+      history.push(newPokemon)
+      console.log("history", history)
+      setUsedPokemonHistory(history)
+      setUserInput("")
+      console.log(usedPokemonHistory)
+    }
+  }
+
+  useEffect(() => {
+    console.log("updated pokemon history", usedPokemonHistory)
+  }, [usedPokemonHistory])
 
 
 
   return (
     <div className="App">
       <header className="App-header">
-        <div>{inputTypes}</div>
         <div id="gameContainer">
         <div id="rowHeader">    
-          <div>
-            {type4}
-          </div>
-          <div>
-            {type5}
-          </div>
-          <div>
-            {type6}
-          </div>
-        </div>
-        
-        <div id="columnHeaderAndGrid">
-          <div id="columnHeader"> 
             <div>
-              {type1}
+              {type4}
             </div>
             <div>
-              {type2}
+              {type5}
             </div>
             <div>
-              {type3}
+              {type6}
             </div>
           </div>
-          <div id="grid">
-            <div id="gridRow1">
-              <button style={{background:tile1Colour}} onClick={event => {
-                setSelectedTile("tile1");
-                setSelectedTypes([type1, type4])
-                setTile1Colour("grey")
-              }}>{tile1}</button>
-              <button style={{background:tile2Colour}} onClick={event => {
-                setSelectedTile("tile2");
-                setSelectedTypes([type2, type4])
-                setTile2Colour("grey")
-              }}>{tile2}</button>
-              <button style={{background:tile3Colour}} onClick={event => {
-                setSelectedTile("tile3");
-                setSelectedTypes([type3, type4])
-                setTile3Colour("grey")
-              }}>{tile3}</button>
+          
+          <div id="columnHeaderAndGrid">
+            <div id="columnHeader"> 
+              <div>
+                {type1}
               </div>
-              <div id="gridRow2">
-                <button style={{background:tile4Colour}} onClick={event => {
-                  setSelectedTile("tile4");
-                  setSelectedTypes([type1, type5])
-                  setTile4Colour("grey")
-                }}>{tile4}</button>
-                <button style={{background:tile5Colour}} onClick={event => {
-                  setSelectedTile("tile5");
-                  setSelectedTypes([type2, type5])
-                  setTile5Colour("grey")
-                }}>{tile5}</button>
-                <button style={{background:tile6Colour}} onClick={event => {
-                  setSelectedTile("tile6");
-                  setSelectedTypes([type3, type5])
-                  setTile6Colour("grey")
-                }}>{tile6}</button>
+              <div>
+                {type2}
               </div>
-              <div id="gridRow3">
-                <button style={{background:tile7Colour}} onClick={event => {
-                  setSelectedTile("tile7");
-                  setSelectedTypes([type1, type6])
-                  setTile7Colour("grey")
-                }}>{tile7}</button>
-                <button style={{background:tile8Colour}} onClick={event => {
-                  setSelectedTile("tile8");
-                  setSelectedTypes([type2, type6])
-                  setTile8Colour("grey")
-                }}>{tile8}</button>
-                <button style={{background:tile9Colour}} onClick={event => {
-                  setSelectedTile("tile9");
-                  setSelectedTypes([type3, type6])
-                  setTile9Colour("grey")
-                }}>{tile9}</button>
+              <div>
+                {type3}
               </div>
-            </div>  
-        </div>
-        
+            </div>
+            <div id="grid">
+              <div id="gridRow1">
+                <button style={{background:tile1Colour}} onClick={event => {
+                  setSelectedTile("tile1");
+                  setSelectedTypes([type1, type4])
+                  setTile1Colour("grey")
+                }}>{tile1}</button>
+                <button style={{background:tile2Colour}} onClick={event => {
+                  setSelectedTile("tile2");
+                  setSelectedTypes([type2, type4])
+                  setTile2Colour("grey")
+                }}>{tile2}</button>
+                <button style={{background:tile3Colour}} onClick={event => {
+                  setSelectedTile("tile3");
+                  setSelectedTypes([type3, type4])
+                  setTile3Colour("grey")
+                }}>{tile3}</button>
+                </div>
+                <div id="gridRow2">
+                  <button style={{background:tile4Colour}} onClick={event => {
+                    setSelectedTile("tile4");
+                    setSelectedTypes([type1, type5])
+                    setTile4Colour("grey")
+                  }}>{tile4}</button>
+                  <button style={{background:tile5Colour}} onClick={event => {
+                    setSelectedTile("tile5");
+                    setSelectedTypes([type2, type5])
+                    setTile5Colour("grey")
+                  }}>{tile5}</button>
+                  <button style={{background:tile6Colour}} onClick={event => {
+                    setSelectedTile("tile6");
+                    setSelectedTypes([type3, type5])
+                    setTile6Colour("grey")
+                  }}>{tile6}</button>
+                </div>
+                <div id="gridRow3">
+                  <button style={{background:tile7Colour}} onClick={event => {
+                    setSelectedTile("tile7");
+                    setSelectedTypes([type1, type6])
+                    setTile7Colour("grey")
+                  }}>{tile7}</button>
+                  <button style={{background:tile8Colour}} onClick={event => {
+                    setSelectedTile("tile8");
+                    setSelectedTypes([type2, type6])
+                    setTile8Colour("grey")
+                  }}>{tile8}</button>
+                  <button style={{background:tile9Colour}} onClick={event => {
+                    setSelectedTile("tile9");
+                    setSelectedTypes([type3, type6])
+                    setTile9Colour("grey")
+                  }}>{tile9}</button>
+                </div>
+              </div>  
+          </div>
+          <ul id="usePokemonHistory">
+            {usedPokemonHistory.map((pokemon) => {
+              <div>
+                <li key={pokemon.id}>{pokemon.value}</li>
+              </div>
+            })}
+          </ul>        
         </div>
         <div id="inputField">
           <input id="userInput" value={userInput} onChange={event => {
             setUserInput(event.target.value)
           }}></input>
-          <button onClick={searchPokemon}>Submit</button>
+          <button id="submitButton" onClick={searchPokemon}>Submit</button>
         </div>
       </header>
 

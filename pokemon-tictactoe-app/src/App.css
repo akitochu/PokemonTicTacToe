@@ -61,3 +61,15 @@ button{
   align-items: center;
   gap: 40px;
 }
+
+#inputField {
+  display: flex;
+  flex-direction: row;
+  padding: 40px;
+  align-self: center;
+}
+
+#submitButton {
+  display: flex;
+  height: 20px;
+}
