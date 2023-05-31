@@ -1,6 +1,7 @@
 import './App.css';
-import {useState, useEffect} from "react";
+import {useState, useEffect, useReducer} from "react";
 
+const URL = `https://pokeapi.co/api/v2/pokemon/`
 
 function App() {
   const [tile1, setTile1] = useState("")
@@ -19,6 +20,16 @@ function App() {
       displayVictory();
     }
   })
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await fetch(URL+"ditto")
+      result.json().then(json => {
+        console.log(json["types"]);
+      })
+    }
+    fetchData();
+  }, []);
 
   const checkWin = () => {
     console.log(tile1)
