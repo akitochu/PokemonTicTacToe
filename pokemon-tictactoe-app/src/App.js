@@ -40,6 +40,9 @@ function App() {
   const [PLAYER_ONE_TURN, setTurn] = useState(true);
   const [usedPokemonHistory, setUsedPokemonHistory] = useState([])
 
+  const [playerOneScore, setPlayerOneScore] = useState(0)
+  const [playerTwoScore, setPlayerTwoScore] = useState(0)
+
 
   
   const [type1, setType1] = useState(gameTypes[Math.floor(Math.random() * gameTypes.length)])
@@ -56,6 +59,42 @@ function App() {
   gameTypes.splice(gameTypes.indexOf(type6), 1)
 
 
+  const resetBoard = () => {
+    setTile1Colour("white")
+    setTile2Colour("white")
+    setTile3Colour("white")
+    setTile4Colour("white")
+    setTile5Colour("white")
+    setTile6Colour("white")
+    setTile7Colour("white")
+    setTile8Colour("white")
+    setTile9Colour("white")
+    gameTypes = types
+    var randomType=gameTypes[Math.floor(Math.random() * gameTypes.length)]
+    setType1(randomType)
+    gameTypes.splice(gameTypes.indexOf(randomType), 1)
+    console.log(gameTypes)
+    randomType=gameTypes[Math.floor(Math.random() * gameTypes.length)]
+    setType2(randomType)
+    gameTypes.splice(gameTypes.indexOf(randomType), 1)
+    console.log(gameTypes)
+    randomType=gameTypes[Math.floor(Math.random() * gameTypes.length)]
+    setType3(randomType)
+    gameTypes.splice(gameTypes.indexOf(randomType), 1)
+    console.log(gameTypes)
+    randomType=gameTypes[Math.floor(Math.random() * gameTypes.length)]
+    setType4(randomType)
+    gameTypes.splice(gameTypes.indexOf(randomType), 1)
+    console.log(gameTypes)
+    randomType=gameTypes[Math.floor(Math.random() * gameTypes.length)]
+    setType5(randomType)
+    gameTypes.splice(gameTypes.indexOf(randomType), 1)
+    console.log(gameTypes)
+    randomType=gameTypes[Math.floor(Math.random() * gameTypes.length)]
+    setType6(randomType)
+    gameTypes.splice(gameTypes.indexOf(randomType), 1)
+    console.log(gameTypes)
+  }
 
   useEffect(() => {
     if(checkWin()){
@@ -191,8 +230,12 @@ function App() {
 
   const displayVictory = () => {
     if (PLAYER_ONE_TURN){
+      setPlayerTwoScore(prev => prev + 1)
+      resetBoard()
       console.log("Player 2 Wins")
     }else{
+      setPlayerOneScore(prev => prev + 1)
+      resetBoard()
       console.log("Player 1 Wins")
     }
   }
@@ -236,6 +279,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <div id="score">
+          {playerOneScore} - {playerTwoScore}
+        </div>
         <div id="gameContainer">
         <div id="rowHeader">    
             <div>
