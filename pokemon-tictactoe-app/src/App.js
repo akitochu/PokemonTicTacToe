@@ -18,6 +18,18 @@ function App() {
   const [tile7, setTile7] = useState("")
   const [tile8, setTile8] = useState("")
   const [tile9, setTile9] = useState("")
+
+  const [tile1Colour, setTile1Colour] = useState("white")
+  const [tile2Colour, setTile2Colour] = useState("white")
+  const [tile3Colour, setTile3Colour] = useState("white")
+  const [tile4Colour, setTile4Colour] = useState("white")
+  const [tile5Colour, setTile5Colour] = useState("white")
+  const [tile6Colour, setTile6Colour] = useState("white")
+  const [tile7Colour, setTile7Colour] = useState("white")
+  const [tile8Colour, setTile8Colour] = useState("white")
+  const [tile9Colour, setTile9Colour] = useState("white")
+
+  const [selectedTile, setSelectedTile] = useState("")
   const [PLAYER_ONE_TURN, setTurn] = useState(true);
 
   const [type1, setType1] = useState(gameTypes[Math.floor(Math.random() * gameTypes.length)])
@@ -39,6 +51,16 @@ function App() {
     if(checkWin()){
       displayVictory();
     }
+
+    if(tile1Colour == "grey" && selectedTile != "tile1")setTile1Colour("white");
+    if(tile2Colour == "grey" && selectedTile != "tile2")setTile2Colour("white");
+    if(tile3Colour == "grey" && selectedTile != "tile3")setTile3Colour("white");
+    if(tile4Colour == "grey" && selectedTile != "tile4")setTile4Colour("white");
+    if(tile5Colour == "grey" && selectedTile != "tile5")setTile5Colour("white");
+    if(tile6Colour == "grey" && selectedTile != "tile6")setTile6Colour("white");
+    if(tile7Colour == "grey" && selectedTile != "tile7")setTile7Colour("white");
+    if(tile8Colour == "grey" && selectedTile != "tile8")setTile8Colour("white");
+    if(tile9Colour == "grey" && selectedTile != "tile9")setTile9Colour("white");
   })
 
   useEffect(() => {
@@ -100,52 +122,55 @@ function App() {
           </div>
           <div id="grid">
             <div id="gridRow1">
-              <button onClick={event => {
-                PLAYER_ONE_TURN ? setTile1("X") : setTile1("O");
-                setTurn(!PLAYER_ONE_TURN);
+              <button style={{background:tile1Colour}} onClick={event => {
+                setSelectedTile("tile1");
+                setTile1Colour("grey")
               }}>{tile1}</button>
-              <button onClick={event => {
-                PLAYER_ONE_TURN ? setTile2("X") : setTile2("O");
-                setTurn(!PLAYER_ONE_TURN);
+              <button style={{background:tile2Colour}} onClick={event => {
+                setSelectedTile("tile2");
+                setTile2Colour("grey")
               }}>{tile2}</button>
-              <button onClick={event => {
-                PLAYER_ONE_TURN ? setTile3("X") : setTile3("O");
-                setTurn(!PLAYER_ONE_TURN);
+              <button style={{background:tile3Colour}} onClick={event => {
+                setSelectedTile("tile3");
+                setTile3Colour("grey")
               }}>{tile3}</button>
               </div>
               <div id="gridRow2">
-                <button onClick={event => {
-                  PLAYER_ONE_TURN ? setTile4("X") : setTile4("O");
-                  setTurn(!PLAYER_ONE_TURN);
+                <button style={{background:tile4Colour}} onClick={event => {
+                  setSelectedTile("tile4");
+                  setTile4Colour("grey")
                 }}>{tile4}</button>
-                <button onClick={event => {
-                  PLAYER_ONE_TURN ? setTile5("X") : setTile5("O");
-                  setTurn(!PLAYER_ONE_TURN);
+                <button style={{background:tile5Colour}} onClick={event => {
+                  setSelectedTile("tile5");
+                  setTile5Colour("grey")
                 }}>{tile5}</button>
-                <button onClick={event => {
-                  PLAYER_ONE_TURN ? setTile6("X") : setTile6("O");
-                  setTurn(!PLAYER_ONE_TURN);
+                <button style={{background:tile6Colour}} onClick={event => {
+                  setSelectedTile("tile6");
+                  setTile6Colour("grey")
                 }}>{tile6}</button>
               </div>
               <div id="gridRow3">
-                <button onClick={event => {
-                  PLAYER_ONE_TURN ? setTile7("X") : setTile7("O");
-                  setTurn(!PLAYER_ONE_TURN);
+                <button style={{background:tile7Colour}} onClick={event => {
+                  setSelectedTile("tile7");
+                  setTile7Colour("grey")
                 }}>{tile7}</button>
-                <button onClick={event => {
-                  PLAYER_ONE_TURN ? setTile8("X") : setTile8("O");
-                  setTurn(!PLAYER_ONE_TURN);
+                <button style={{background:tile8Colour}} onClick={event => {
+                  setSelectedTile("tile8");
+                  setTile8Colour("grey")
                 }}>{tile8}</button>
-                <button onClick={event => {
-                  PLAYER_ONE_TURN ? setTile9("X") : setTile9("O");
-                  setTurn(!PLAYER_ONE_TURN);
+                <button style={{background:tile9Colour}} onClick={event => {
+                  setSelectedTile("tile9");
+                  setTile9Colour("grey")
                 }}>{tile9}</button>
               </div>
             </div>  
         </div>
         
         </div>
-        
+        <div id="inputField">
+          <input></input>
+          <button>Submit</button>
+        </div>
       </header>
 
       
