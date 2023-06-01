@@ -73,3 +73,34 @@ button{
   display: flex;
   height: 20px;
 }
+
+#grid {
+  position: relative;
+}
+
+#pokemonImg1,
+#pokemonImg2,
+#pokemonImg3,
+#pokemonImg4,
+#pokemonImg5,
+#pokemonImg6,
+#pokemonImg7,
+#pokemonImg8,
+#pokemonImg9
+{
+  position: absolute;
+}
+
+#pokemonImg1,
+#pokemonImg2,
+#pokemonImg3,
+#pokemonImg4,
+#pokemonImg5,
+#pokemonImg6,
+#pokemonImg7,
+#pokemonImg8,
+#pokemonImg9
+{
+  padding-left: 28px;
+  padding-top: 25px;
+}

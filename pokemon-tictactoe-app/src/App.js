@@ -4,6 +4,7 @@ import {useState, useEffect} from "react";
 import axios from 'axios';
 
 const URL = `https://pokeapi.co/api/v2/pokemon/`
+const IMGURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/`
 const types = ["normal", "fighting", "flying", "poison", "ground", "rock", "bug", "ghost", "steel", 
                "fire", "water", "grass", "electric", "psychic", "ice", "dragon", "dark", "fairy" ]
 
@@ -30,6 +31,16 @@ function App() {
   const [tile7Colour, setTile7Colour] = useState("white")
   const [tile8Colour, setTile8Colour] = useState("white")
   const [tile9Colour, setTile9Colour] = useState("white")
+
+  const [pokemongImgUrl1, setPokemonImgUrl1] = useState("")
+  const [pokemongImgUrl2, setPokemonImgUrl2] = useState("")
+  const [pokemongImgUrl3, setPokemonImgUrl3] = useState("")
+  const [pokemongImgUrl4, setPokemonImgUrl4] = useState("")
+  const [pokemongImgUrl5, setPokemonImgUrl5] = useState("")
+  const [pokemongImgUrl6, setPokemonImgUrl6] = useState("")
+  const [pokemongImgUrl7, setPokemonImgUrl7] = useState("")
+  const [pokemongImgUrl8, setPokemonImgUrl8] = useState("")
+  const [pokemongImgUrl9, setPokemonImgUrl9] = useState("")
 
   const [selectedTile, setSelectedTile] = useState("")
   const [selectedTypes, setSelectedTypes] = useState([])
@@ -69,6 +80,15 @@ function App() {
     setTile7Colour("white")
     setTile8Colour("white")
     setTile9Colour("white")
+    setPokemonImgUrl1("")
+    setPokemonImgUrl2("")
+    setPokemonImgUrl3("")
+    setPokemonImgUrl4("")
+    setPokemonImgUrl5("")
+    setPokemonImgUrl6("")
+    setPokemonImgUrl7("")
+    setPokemonImgUrl8("")
+    setPokemonImgUrl9("")
     gameTypes = types
     var randomType=gameTypes[Math.floor(Math.random() * gameTypes.length)]
     setType1(randomType)
@@ -113,7 +133,6 @@ function App() {
 
     checkValidInput()
     setUsedPokemonHistory(usedPokemonHistory)
-    console.log(usedPokemonHistory, "TEST")
   })
 
   const checkValidInput = () => {
@@ -247,6 +266,35 @@ function App() {
       setInputTypes([response["data"]["types"]["0"]["type"]["name"], response["data"]["types"]["1"]["type"]["name"]])
       setCheckInput(true)
       setSelectedPokemonId(response["data"]["id"])
+      switch(selectedTile){
+        case "tile1":
+          setPokemonImgUrl1(IMGURL + response["data"]["id"] + ".png")
+          break;
+        case "tile2":
+          setPokemonImgUrl2(IMGURL + response["data"]["id"] + ".png")
+          break;
+        case "tile3":
+          setPokemonImgUrl3(IMGURL + response["data"]["id"] + ".png")
+          break;
+        case "tile4":
+          setPokemonImgUrl4(IMGURL + response["data"]["id"] + ".png")
+          break;
+        case "tile5":
+          setPokemonImgUrl5(IMGURL + response["data"]["id"] + ".png")
+          break;
+        case "tile6":
+          setPokemonImgUrl6(IMGURL + response["data"]["id"] + ".png")
+          break;
+        case "tile7":
+          setPokemonImgUrl7(IMGURL + response["data"]["id"] + ".png")
+          break;
+        case "tile8":
+          setPokemonImgUrl8(IMGURL + response["data"]["id"] + ".png")
+          break;
+        case "tile9":
+          setPokemonImgUrl9(IMGURL + response["data"]["id"] + ".png")
+          break;
+      }
     }).catch(error => {
       console.error(error)
     });
@@ -309,13 +357,19 @@ function App() {
             </div>
             <div id="grid">
               <div id="gridRow1">
-                <button style={{background:tile1Colour}} onClick={event => {
+                <img id="pokemonImg1" 
+                  src={pokemongImgUrl1}
+                />
+                <button style={{background:tile1Colour}}  onClick={event => {
                   if(tile1Colour != "blue" && tile1Colour != "red"){
                     setSelectedTile("tile1");
                     setSelectedTypes([type1, type4])
                     setTile1Colour("grey")
                   }
                 }}>{tile1}</button>
+                <img id="pokemonImg2" 
+                  src={pokemongImgUrl2}
+                />
                 <button style={{background:tile2Colour}} onClick={event => {
                   if(tile2Colour != "blue" && tile2Colour != "red"){
                     setSelectedTile("tile2");
@@ -323,6 +377,9 @@ function App() {
                     setTile2Colour("grey")
                   }
                 }}>{tile2}</button>
+                <img id="pokemonImg3" 
+                  src={pokemongImgUrl3}
+                />
                 <button style={{background:tile3Colour}} onClick={event => {
                   if(tile3Colour != "blue" && tile3Colour != "red"){
                     setSelectedTile("tile3");
@@ -332,6 +389,9 @@ function App() {
                 }}>{tile3}</button>
                 </div>
                 <div id="gridRow2">
+                  <img id="pokemonImg4" 
+                    src={pokemongImgUrl4}
+                  />
                   <button style={{background:tile4Colour}} onClick={event => {
                     if(tile4Colour != "blue" && tile4Colour != "red"){
                       setSelectedTile("tile4");
@@ -339,6 +399,9 @@ function App() {
                       setTile4Colour("grey")
                     }
                   }}>{tile4}</button>
+                  <img id="pokemonImg5" 
+                    src={pokemongImgUrl5}
+                  />
                   <button style={{background:tile5Colour}} onClick={event => {
                     if(tile5Colour != "blue" && tile5Colour != "red"){
                       setSelectedTile("tile5");
@@ -346,6 +409,9 @@ function App() {
                       setTile5Colour("grey")
                     }
                   }}>{tile5}</button>
+                  <img id="pokemonImg6" 
+                    src={pokemongImgUrl6}
+                  />
                   <button style={{background:tile6Colour}} onClick={event => {
                     if(tile6Colour != "blue" && tile6Colour != "red"){
                       setSelectedTile("tile6");
@@ -355,6 +421,9 @@ function App() {
                   }}>{tile6}</button>
                 </div>
                 <div id="gridRow3">
+                  <img id="pokemonImg7" 
+                    src={pokemongImgUrl7}
+                  />
                   <button style={{background:tile7Colour}} onClick={event => {
                     if(tile7Colour != "blue" && tile7Colour != "red"){
                       setSelectedTile("tile7");
@@ -362,6 +431,9 @@ function App() {
                       setTile7Colour("grey")
                     }
                   }}>{tile7}</button>
+                  <img id="pokemonImg8" 
+                    src={pokemongImgUrl8}
+                  />
                   <button style={{background:tile8Colour}} onClick={event => {
                     if(tile8Colour != "blue" && tile8Colour != "red"){
                       setSelectedTile("tile8");
@@ -369,6 +441,9 @@ function App() {
                       setTile8Colour("grey")
                     }
                   }}>{tile8}</button>
+                  <img id="pokemonImg9" 
+                    src={pokemongImgUrl9}
+                  />
                   <button style={{background:tile9Colour}} onClick={event => {
                     if(tile9Colour != "blue" && tile9Colour != "red"){
                       setSelectedTile("tile9");
@@ -394,7 +469,8 @@ function App() {
           <button id="submitButton" onClick={searchPokemon}>Submit</button>
         </div>
       </header>
-
+      
+      
       
     </div>
   );
