@@ -310,53 +310,71 @@ function App() {
             <div id="grid">
               <div id="gridRow1">
                 <button style={{background:tile1Colour}} onClick={event => {
-                  setSelectedTile("tile1");
-                  setSelectedTypes([type1, type4])
-                  setTile1Colour("grey")
+                  if(tile1Colour != "blue" && tile1Colour != "red"){
+                    setSelectedTile("tile1");
+                    setSelectedTypes([type1, type4])
+                    setTile1Colour("grey")
+                  }
                 }}>{tile1}</button>
                 <button style={{background:tile2Colour}} onClick={event => {
-                  setSelectedTile("tile2");
-                  setSelectedTypes([type2, type4])
-                  setTile2Colour("grey")
+                  if(tile2Colour != "blue" && tile2Colour != "red"){
+                    setSelectedTile("tile2");
+                    setSelectedTypes([type2, type4])
+                    setTile2Colour("grey")
+                  }
                 }}>{tile2}</button>
                 <button style={{background:tile3Colour}} onClick={event => {
-                  setSelectedTile("tile3");
-                  setSelectedTypes([type3, type4])
-                  setTile3Colour("grey")
+                  if(tile3Colour != "blue" && tile3Colour != "red"){
+                    setSelectedTile("tile3");
+                    setSelectedTypes([type3, type4])
+                    setTile3Colour("grey")
+                  }
                 }}>{tile3}</button>
                 </div>
                 <div id="gridRow2">
                   <button style={{background:tile4Colour}} onClick={event => {
-                    setSelectedTile("tile4");
-                    setSelectedTypes([type1, type5])
-                    setTile4Colour("grey")
+                    if(tile4Colour != "blue" && tile4Colour != "red"){
+                      setSelectedTile("tile4");
+                      setSelectedTypes([type1, type5])
+                      setTile4Colour("grey")
+                    }
                   }}>{tile4}</button>
                   <button style={{background:tile5Colour}} onClick={event => {
-                    setSelectedTile("tile5");
-                    setSelectedTypes([type2, type5])
-                    setTile5Colour("grey")
+                    if(tile5Colour != "blue" && tile5Colour != "red"){
+                      setSelectedTile("tile5");
+                      setSelectedTypes([type2, type5])
+                      setTile5Colour("grey")
+                    }
                   }}>{tile5}</button>
                   <button style={{background:tile6Colour}} onClick={event => {
-                    setSelectedTile("tile6");
-                    setSelectedTypes([type3, type5])
-                    setTile6Colour("grey")
+                    if(tile6Colour != "blue" && tile6Colour != "red"){
+                      setSelectedTile("tile6");
+                      setSelectedTypes([type3, type5])
+                      setTile6Colour("grey")
+                    }
                   }}>{tile6}</button>
                 </div>
                 <div id="gridRow3">
                   <button style={{background:tile7Colour}} onClick={event => {
-                    setSelectedTile("tile7");
-                    setSelectedTypes([type1, type6])
-                    setTile7Colour("grey")
+                    if(tile7Colour != "blue" && tile7Colour != "red"){
+                      setSelectedTile("tile7");
+                      setSelectedTypes([type1, type6])
+                      setTile7Colour("grey")
+                    }
                   }}>{tile7}</button>
                   <button style={{background:tile8Colour}} onClick={event => {
-                    setSelectedTile("tile8");
-                    setSelectedTypes([type2, type6])
-                    setTile8Colour("grey")
+                    if(tile8Colour != "blue" && tile8Colour != "red"){
+                      setSelectedTile("tile8");
+                      setSelectedTypes([type2, type6])
+                      setTile8Colour("grey")
+                    }
                   }}>{tile8}</button>
                   <button style={{background:tile9Colour}} onClick={event => {
-                    setSelectedTile("tile9");
-                    setSelectedTypes([type3, type6])
-                    setTile9Colour("grey")
+                    if(tile9Colour != "blue" && tile9Colour != "red"){
+                      setSelectedTile("tile9");
+                      setSelectedTypes([type3, type6])
+                      setTile9Colour("grey")
+                    }
                   }}>{tile9}</button>
                 </div>
               </div>  
